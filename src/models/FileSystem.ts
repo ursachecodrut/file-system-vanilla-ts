@@ -77,7 +77,15 @@ export class FileSystem {
 		);
 	}
 
-	changeDirectory(path: string) {
+	ls(stringArr: boolean = true) {
+		const content = this.currentDirectory.content;
+		if (!stringArr) {
+			return content;
+		}
+		return content.map((c) => c.name);
+	}
+
+	cd(path: string) {
 		if (!path) {
 			return null;
 		}
