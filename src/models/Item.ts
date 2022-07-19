@@ -19,6 +19,14 @@ export abstract class Item {
 		return this._parent;
 	}
 
+	get path(): string {
+		if (this.parent) {
+			return `${this.parent.path}/${this.name}`;
+		}
+
+		return this.name;
+	}
+
 	set name(newName: string) {
 		// empty string
 		if (!newName) {

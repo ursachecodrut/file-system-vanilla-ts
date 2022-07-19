@@ -26,5 +26,29 @@ export class Directory extends Item {
 			this._children.delete(itemName);
 			item.parent = null;
 		}
+
+		return !this.hasItem(itemName);
+	}
+
+	insertItem(item: Item) {
+		if (this.hasItem(item.name)) return true;
+
+		if (item === this) {
+			throw new Error('Directory cannot contain itself');
+		}
+
+		let parent = this.parent;
+
+		while (parent !== null) {
+			if (parent === item) {
+				throw new Error('Directory cannot contain itself');
+			}
+			parent = parent.parent;
+		}
+
+		this._children.set(item.name, item);
+		item.parent = this;
+
+		return this.hasItem(item.name);
 	}
 }
