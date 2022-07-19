@@ -101,43 +101,37 @@ export class FileSystem {
 		return dir;
 	}
 
+	goBack() {
+		this._currentPathArray.pop();
+		this._currentDirectory =
+			this._currentPathArray[this._currentPathArray.length - 1];
+		console.log(this._currentPathArray);
+		console.log(this._currentDirectory);
+	}
+
 	private getDirFromPathString(dirPath: string) {
 		// root dir
-
 		if (dirPath.match(/^(root\/?|\/)$/g)) {
-			console.log('first');
 			return this.root;
 		}
 
 		if (dirPath.match(/^\.\/?$/g)) {
-			console.log('sec');
 			return this.currentDirectory;
 		}
-		let dir;
-		if (dirPath.match(/^(root\/?|\/)/g)) {
-			console.log('e root');
-			dir = this.root;
-		} else {
-			console.log('e curr dir ');
-			dir = this.currentDirectory;
-		}
-		// let dir = dirPath.match(/^(root\/?|\/)/g)
-		// 	? this.root
-		// 	: this.currentDirectory;
+
+		let dir = dirPath.match(/^(root\/?|\/)/g)
+			? this.root
+			: this.currentDirectory;
+
 		const paths = dirPath
 			.replace(/^(root\/|.root\/|\.\/|\/)|\/$/g, '')
 			.split('/');
 
 		while (paths.length) {
-			console.log(paths);
-			console.log(dir.name);
 			dir = dir.getItem(paths.shift()!) as Directory;
-			console.log('after');
-			console.log(dir);
 		}
 
 		if (paths.length === 0) {
-			console.log('paths e gol');
 			return dir;
 		}
 
