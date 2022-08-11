@@ -77,15 +77,15 @@ export class FileSystem {
 		);
 	}
 
-	ls(stringArr: boolean = true) {
+	getCurrentDirContent(asStringArr: boolean = true) {
 		const content = this.currentDirectory.content;
-		if (!stringArr) {
+		if (!asStringArr) {
 			return content;
 		}
 		return content.map((c) => c.name);
 	}
 
-	cd(path: string) {
+	changeCurrentDir(path: string) {
 		if (!path) {
 			return null;
 		}

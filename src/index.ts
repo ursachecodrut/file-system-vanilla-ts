@@ -7,6 +7,6 @@ const fs = new FileSystem();
 one.insertItem(two);
 fs.insertItem(one);
 console.log(fs.currentDirectory.name);
-console.log(fs.cd('one')?.name);
+console.log(fs.changeCurrentDir('one')?.name);
 console.log(fs.currentDirectory.name);
-console.log(fs.ls(false));
+console.log(fs.getCurrentDirContent(false));
